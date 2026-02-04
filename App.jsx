@@ -1,30 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 function App() {
-  const[tasks,setTask]=useState([])
-  const[text,setText]=useState("")
-  const add=()=>{
-    if(text==="") return;
-    setTask(...tasks,{name:text,completed:false})
-    setText("")
-  }
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  const containerStyle = {
+    minHeight: "100vh",
+    padding: "20px",
+    backgroundColor: theme === "light" ? "#fff" : "#222",
+    color: theme === "light" ? "#222" : "#fff",
+    transition: "all 0.3s ease"
+  };
+
   return (
-    <>
-      <h1>TO-DO-LIST</h1>
-      <input
-       value={text}
-      onChange={(e)=>setText(e.target.value)}
-      placeholder="Enter Task"
-      />
-      <button onClick={add}>Add</button>
-      <ul>
-        {tasks.map((task,index)=>(
-        <li key={index}>
-          {tasks.name}
-        </li>))}
-      </ul>
-    </>
-  )
+    <div style={containerStyle}>
+      <h1>Theme Toggle Example</h1>
+      <h2>Click the button to switch between light and dark</h2>
+      <button onClick={toggleTheme}>
+        Switch to {theme === "light" ? "Dark" : "Light"} Mode
+      </button>
+    </div>
+  );
 }
 
-export default App
+export default App;
